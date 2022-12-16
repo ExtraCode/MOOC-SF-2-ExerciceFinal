@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Bienvenue sur Locky{% endblock %}
+
+{% block body %}
+
+    <div class="row px-5 mt-5">
+        <div class="col">
+            <h1 class="fs-3">Les dernières demandes de prestation</h1>
+
+            {% if prestations is not empty %}
+
+                <table class="table mt-4">
+                    <thead>
+                    <tr>
+                        <th scope="col">Date de la demande</th>
+                        <th scope="col">Propriétaire</th>
+                        <th scope="col">Nom</th>
+                        <th scope="col">Extrait</th>
+                        <th scope="col">Rémunération</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {% for prestation in prestations %}
+                        <tr>
+                            <td>{{ prestation.dateCreation | date('d/m/Y') }}</td>
+                            <td>{{ prestation.proprietaire.nom }}</td>
+                            <td>{{ prestation.nom }}</td>
+                            <td>{{ prestation.extrait }}</td>
+                            <td>{{ prestation.remuneration }}€</td>
+                            <td>
+                                <button class="btn btn-sm btn-primary">Voir</button>
+                            </td>
+                        </tr>
+                    {% endfor %}
+
+                    </tbody>
+                </table>
+            {% else %}
+
+                Aucune prestation à afficher ici
+
+            {% endif %}
+
+        </div>
+
+        <div class="col-3">
+            <h2 class="fs-5">Bienvenue au dernier utilisateur inscrit</h2>
+            {{ lastUser.nom }} {{ lastUser.prenom }}
+            <hr/>
+        </div>
+    </div>
+
+{% endblock %}

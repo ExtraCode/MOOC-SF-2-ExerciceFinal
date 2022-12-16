@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ (app.request.get('_route') == "app_prestation_ajouter") ? "Ajouter" : "Modifier" }} une prestation{% endblock %}
+
+{% block body %}
+
+    <h1 class="fs-3 mt-5 text-center">Ajouter une prestation</h1>
+
+    <div class="container">
+        <div class="w-50 m-auto">
+            {{ form_start(form) }}
+
+                {{ form_rest(form) }}
+
+            <button class="btn btn-primary" type="submit">{{ (app.request.get('_route') == "app_prestation_ajouter") ? "Ajouter" : "Modifier" }}</button>
+
+            {{ form_end(form) }}
+        </div>
+    </div>
+
+{% endblock %}

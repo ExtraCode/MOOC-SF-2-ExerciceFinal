@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes prestations{% endblock %}
+
+{% block body %}
+
+    <div class="px-5 mt-5">
+        <h1 class="fs-3">Mes prestations</h1>
+
+        {% if prestations is not empty %}
+
+            <table class="table mt-4">
+                <thead>
+                <tr>
+                    <th scope="col">Date de la demande</th>
+                    <th scope="col">Nom</th>
+                    <th scope="col">Rémunération</th>
+                    <th scope="col">Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for prestation in prestations %}
+                    <tr>
+                        <td>{{ prestation.dateCreation | date('d/m/Y') }}</td>
+                        <td>{{ prestation.nom }}</td>
+                        <td>{{ prestation.remuneration }}€</td>
+                        <td>
+                            <a href="{{ path('app_prestation_modifier', { 'id' : prestation.id }) }}" class="btn btn-sm btn-primary">modifier</a>
+                            <a href="{{ path('app_prestation_supprimer', { 'id' : prestation.id }) }}" class="btn btn-sm btn-danger" onclick="return confirm('Etes vous sûr ?')">supprimer</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        {% else %}
+
+            Aucune prestation à afficher ici
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}
